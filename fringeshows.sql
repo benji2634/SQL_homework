@@ -184,7 +184,7 @@ DELETE FROM shows_users WHERE user_id = 25;
 -- SELECT name, price FROM shows WHERE price IN (SELECT MAX(price) FROM shows);
 
 -- SELECT name, price FROM shows 
---   ORDER BY price DESC OFFSET 1 LIMIT 1; 
+--   ORDER BY price ASC OFFSET 1 LIMIT 1; 
 
 -- SELECT name FROM users WHERE name LIKE 'N%';
 
@@ -194,8 +194,9 @@ DELETE FROM shows_users WHERE user_id = 25;
 
 -- SELECT COUNT(shows_users.user_id) FROM shows_users INNER JOIN shows ON shows_users.show_id = shows.id WHERE shows.name = 'Shitfaced Shakespeare';
 
--- SELECT COUNT(shows_users.user_id) FROM shows_users INNER JOIN shows ON shows_users.show_id = shows.id INNER JOIN users ON shows_users.user_id = users.id;
 
-SELECT users.name FROM users INNER JOIN shows_users ON shows_users.user_id = users.id;
+-- SELECT users.name, COUNT(user_id) FROM users INNER JOIN shows_users ON shows_users.user_id = users.id GROUP BY name;
 
--- SELECT COUNT(shows_users.user_id) FROM shows_users INNER JOIN shows ON shows_users.show_id = shows.id:
+SELECT users.name FROM shows_users INNER JOIN users ON shows_users.user_id = users.id INNER JOIN times ON shows_users.show_id = times.show_id WHERE times.time = '17:15';
+
+-- SELECT users.name FROM shows_users INNER JOIN users ON shows_users.user_id INNER JOIN times ON shows_users.show_id = times.show_id WHERE times.time = '17:15';

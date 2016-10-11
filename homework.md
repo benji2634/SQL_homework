@@ -60,7 +60,8 @@ Using the SQL Database file given to you as the source of data to answer the que
       ORDER BY price ASC;
 
   10. Select the average price of all shows.
-  =>  SELECT AVG(price) FROM shows;
+  =>  SELECT AVG(price) FROM shows; -- or
+  =>  SELECT ROUND(AVG(price), 2) FROM shows;
 
   11. Select the price of the least expensive show.
   =>  SELECT MIN(price) FROM shows;
@@ -72,12 +73,12 @@ Using the SQL Database file given to you as the source of data to answer the que
   =>  SELECT SUM(price) FROM shows WHERE price < 20;
 
   14. Select the name and price of the most expensive show.
-  =>  SELECT name, price FROM shows WHERE price IN (SELECT MAX(price) FROM shows);
-
+  =>  SELECT name, price FROM shows WHERE price IN (SELECT MAX(price) FROM shows); -- or
+      SELECT name, price FROM shows ORDER BY price DESC LIMIT 1;
   15. Select the name and price of the second from cheapest show.
   =>  SELECT name, price FROM shows 
-        ORDER BY price DESC OFFSET 1 LIMIT 1; 
-        
+        ORDER BY price ASC OFFSET 1 LIMIT 1; 
+
   16. Select the names of all users whose names start with the letter "N".
   =>  SELECT name FROM users WHERE name LIKE 'N%';
 
@@ -98,5 +99,6 @@ Using the SQL Database file given to you as the source of data to answer the que
       users.show_id = shows.id WHERE shows.name = 'Shitfaced Shakespeare';
 
   20. Select all of the user names and the count of shows they're going to see.
+=>  SELECT users.name, COUNT(user_id) FROM users INNER JOIN shows_users ON shows_ users.user_id = users.id GROUP BY name;
 
   21. SELECT all users who are going to a show at 17:15.
